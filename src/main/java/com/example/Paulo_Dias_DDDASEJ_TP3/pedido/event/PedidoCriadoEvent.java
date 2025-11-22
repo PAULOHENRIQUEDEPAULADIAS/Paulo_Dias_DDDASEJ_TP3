@@ -15,9 +15,9 @@ public class PedidoCriadoEvent extends BaseEvent {
     private UUID id_cliente;
 
     public PedidoCriadoEvent(UUID id_event, String type, Instant timestamp,
-                             Long version, UUID id_aggregate, UUID id_cliente,
+                             UUID id_aggregate, UUID id_cliente,
                              List<?> items) {
-        super(id_event, type, timestamp, version, id_aggregate);
+        super(id_event, type, timestamp, id_aggregate);
         this.id_cliente = id_cliente;
         this.items = items;
     }

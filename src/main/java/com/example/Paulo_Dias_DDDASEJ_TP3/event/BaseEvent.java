@@ -22,9 +22,6 @@ public class BaseEvent {
     @Column(name = "timestamp")
     private Instant timestamp;
 
-    @Column(name = "versao")
-    private Long version;
-
     @Column(name = "id_agregado")
     private UUID id_aggregate;
 }
