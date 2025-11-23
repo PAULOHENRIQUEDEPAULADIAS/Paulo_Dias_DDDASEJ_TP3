@@ -7,6 +7,7 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
@@ -19,8 +20,10 @@ public class PedidoAggregate {
     private UUID id_aggregate;
 
     private UUID id_cliente;
-
     private List<?> items;
+    private Double value;
+    private Instant timeStamp;
+    private String type;
 
     public PedidoAggregate(CriarPedidoCommand cpc){
         if (cpc.getId_cliente() == null) {throw new IllegalArgumentException ("Pedido deve possuir vínculo com algum cliente");}
@@ -33,7 +36,8 @@ public class PedidoAggregate {
                 cpc.getTimestamp(),
                 cpc.getId_aggregate(),
                 cpc.getId_cliente(),
-                cpc.getItems()
+                cpc.getItems(),
+                cpc.getValue()
         );
         apply(pce);
     }
@@ -43,5 +47,8 @@ public class PedidoAggregate {
         this.id_aggregate = event.getId_aggregate();
         this.id_cliente = event.getId_cliente();
         this.items = event.getItems();
+        this.value = event.getValue();
+        this.timeStamp = event.getTimestamp();
+        this.type = event.getType();
     }
 }
